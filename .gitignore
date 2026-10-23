@@ -1,0 +1,41 @@
+# -------------------------
+# Quarto build artifacts
+# -------------------------
+
+# Quarto project/cache directories
+.quarto/
+**/.quarto/
+
+# Rendered supporting files
+*_files/
+
+# Rendered HTML
+*.html
+
+# Quarto freeze/cache output
+_freeze/
+
+# Temporary files
+temp_qmd-backup/
+
+# -------------------------
+# OS / editor junk
+# -------------------------
+
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# R
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# -------------------------
+# Misc.
+# -------------------------
+
+*_throwaway.qmd
