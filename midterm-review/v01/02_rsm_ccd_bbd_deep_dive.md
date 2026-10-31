@@ -59,7 +59,7 @@ Where:
 - $\Delta X = X_{high} - X_{low}$ is the range between high and low levels.
 - $\Delta X / 2$ is the unit distance (distance corresponding to $+1$ coded unit).
 
-### Example from your coursework (`example-01.r`):
+### Example from your coursework (`example-01.R`):
 Suppose Temperature varies from $35^\circ\text{C}$ (low, $-1$) to $45^\circ\text{C}$ (high, $+1$):
 - Center: $X_{center} = \frac{45 + 35}{2} = 40^\circ\text{C}$.
 - Half-step: $\Delta X / 2 = \frac{45 - 35}{2} = 5^\circ\text{C}$.
