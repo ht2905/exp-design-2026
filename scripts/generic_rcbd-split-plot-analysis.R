@@ -1,4 +1,4 @@
-csv_file <- if (file.exists("data.csv")) "data.csv" else "exercise-03_rcbd/data.csv"
+csv_file <- "data.csv"
 
 col_resp  <- "cell_growth"  # Response variable
 col_wp    <- "temp"         # Hard-to-change (Whole-Plot) factor
