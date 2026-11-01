@@ -75,24 +75,23 @@ Using $x_i = \frac{X_i - \text{Midpoint}}{\text{Half-Step}}$:
 
 In LibreOffice Calc, create 4 columns and export as `bbd.csv`:
 
-```csv
-x1,x2,x3,yield
--1,-1,0,31.8
-1,-1,0,37.1
--1,1,0,39.3
-1,1,0,39.4
--1,0,-1,39.0
-1,0,-1,40.3
--1,0,1,35.3
-1,0,1,39.8
-0,-1,-1,35.2
-0,1,-1,42.4
-0,-1,1,34.9
-0,1,1,38.7
-0,0,0,45.3
-0,0,0,45.0
-0,0,0,45.3
-```
+| x1 | x2 | x3 | yield |
+| :---: | :---: | :---: | :---: |
+| -1 | -1 | 0 | 31.8 |
+| +1 | -1 | 0 | 37.1 |
+| -1 | +1 | 0 | 39.3 |
+| +1 | +1 | 0 | 39.4 |
+| -1 | 0 | -1 | 39.0 |
+| +1 | 0 | -1 | 40.3 |
+| -1 | 0 | +1 | 35.3 |
+| +1 | 0 | +1 | 39.8 |
+| 0 | -1 | -1 | 35.2 |
+| 0 | +1 | -1 | 42.4 |
+| 0 | -1 | +1 | 34.9 |
+| 0 | +1 | +1 | 38.7 |
+| 0 | 0 | 0 | 45.3 |
+| 0 | 0 | 0 | 45.0 |
+| 0 | 0 | 0 | 45.3 |
 
 ---
 
@@ -123,18 +122,14 @@ summary(rsm_fit)
 
 #### R Terminal ANOVA Output:
 
-```
-Analysis of Variance Table
-
-Response: yield
-                Df  Sum Sq Mean Sq  F value    Pr(>F)
-FO(x1, x2, x3)   3  78.165  26.055 491.6038 1.350e-06 ***
-TWI(x1, x2, x3)  3  12.210   4.070  76.7925  0.000133 ***
-PQ(x1, x2, x3)   3 138.397  46.132 870.4235 3.251e-07 ***
-Residuals        5   0.265   0.053                   
-Lack of fit      3   0.205   0.068   2.2778  0.319604
-Pure error       2   0.060   0.030                   
-```
+| Component / Factor | Df | Sum Sq | Mean Sq | F value | Pr(>F) | Significance ($\alpha=0.05$) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **FO(x1, x2, x3)** | 3 | 78.165 | 26.055 | 491.6038 | $1.350 \times 10^{-6}$ | **Highly Significant (***)** |
+| **TWI(x1, x2, x3)** | 3 | 12.210 | 4.070 | 76.7925 | 0.000133 | **Highly Significant (***)** |
+| **PQ(x1, x2, x3)** | 3 | 138.397 | 46.132 | 870.4235 | $3.251 \times 10^{-7}$ | **Highly Significant (***)** |
+| **Residuals** | 5 | 0.265 | 0.053 | — | — | — |
+| ↳ **Lack of fit** | 3 | 0.205 | 0.068 | 2.2778 | 0.319604 | **Not Significant ($p > 0.05$, Good Fit)** |
+| ↳ **Pure error** | 2 | 0.060 | 0.030 | — | — | — |
 
 #### What Each Line Means in Plain English:
 1. **`FO` (First-Order Slopes, $p < 0.001$):** Highly significant. Demonstrates that changing temperature, enzyme, and time significantly changes yield in a general direction.
@@ -156,22 +151,29 @@ Pure error       2   0.060   0.030
 
 #### R Terminal Console Output:
 
-```
-Stationary point of response surface:
-        x1         x2         x3 
- 0.1145743  0.2886621 -0.2067901 
+**Stationary Point of Response Surface ($\mathbf{x}_0$):**
 
-Eigenanalysis:
-eigen() decomposition
-$values
-[1] -2.491366 -3.728953 -4.929681
+| Coded Factor | Stationary Coordinate ($x_i$) | Natural Calculation | Optimal Physical Value |
+| :--- | :---: | :--- | :---: |
+| **$x_1$** (Temperature) | $+0.1145743$ | $35 + (0.1146 \times 5)$ | **$35.57^\circ\text{C}$** |
+| **$x_2$** (Lysozyme) | $+0.2886621$ | $1.0 + (0.2887 \times 0.5)$ | **$1.144\text{ mg/mL}$** |
+| **$x_3$** (Incubation Time) | $-0.2067901$ | $30 + (-0.2068 \times 15)$ | **$26.90\text{ min}$** |
 
-$vectors
-         [,1]       [,2]        [,3]
-x1  0.4298890  0.7792236 -0.45607679
-x2 -0.3107448 -0.3465835 -0.88505229
-x3  0.8477223 -0.5221978 -0.09314722
-```
+**Eigenanalysis (Spectral Decomposition of Matrix $\mathbf{B}$):**
+
+| Eigenvalue ($\lambda_i$) | Value | Sign | Geometric Behavior |
+| :--- | :---: | :---: | :--- |
+| **$\lambda_1$** | $-2.491366$ | Negative | Curves downwards |
+| **$\lambda_2$** | $-3.728953$ | Negative | Curves downwards |
+| **$\lambda_3$** | $-4.929681$ | Negative | Curves downwards |
+
+**Eigenvectors:**
+
+| Variable | $\mathbf{v}_1$ ($\lambda_1 = -2.491$) | $\mathbf{v}_2$ ($\lambda_2 = -3.729$) | $\mathbf{v}_3$ ($\lambda_3 = -4.930$) |
+| :--- | :---: | :---: | :---: |
+| **$x_1$** | $+0.4298890$ | $+0.7792236$ | $-0.45607679$ |
+| **$x_2$** | $-0.3107448$ | $-0.3465835$ | $-0.88505229$ |
+| **$x_3$** | $+0.8477223$ | $-0.5221978$ | $-0.09314722$ |
 
 #### Detailed Interpretation:
 1. **Stationary Point Location:**

@@ -31,8 +31,9 @@ In a biology experiment, your factors might be:
 These factors have completely different numerical scales. If you put them directly into an equation, a 1-unit change in temperature ($1^\circ\text{C}$) is tiny compared to a 1-unit change in enzyme ($1\text{ mg/mL}$ is doubling the enzyme!).  
 To treat all factors equally and fairly, we convert them into **dimensionless coded numbers ($x_i$)** centered at $0$:
 
-```
-Low Level (-1)  ───────────  Center Point (0)  ───────────  High Level (+1)
+```mermaid
+flowchart LR
+    Low["Low Level (-1)"] --- Center["Center Point (0)"] --- High["High Level (+1)"]
 ```
 
 ### The Coding Formula (Simple 2-Step Arithmetic):
@@ -125,26 +126,12 @@ When R fits your model, it calculates the **Stationary Point ($\mathbf{x}_0$)**�
 Now, is that flat spot a **mountain peak (optimum)**, a **valley basin (minimum)**, or a **mountain pass / saddle**?  
 R performs an **Eigenanalysis**, calculating numbers called **eigenvalues ($\lambda_1, \lambda_2, \lambda_3$)**:
 
-```
-========================================================================================
-                      EIGENVALUES SHAPE INTERPRETATION RULES
-========================================================================================
-1. ALL EIGENVALUES ARE NEGATIVE (λ1 < 0, λ2 < 0, λ3 < 0):
-   • Meaning: In every direction you step, the surface curves DOWNWARDS.
-   • Shape: A Mountain Peak (Dome).
-   • Result: LOCAL MAXIMUM (TRUE OPTIMUM!). You found the highest yield.
-
-2. ALL EIGENVALUES ARE POSITIVE (λ1 > 0, λ2 > 0, λ3 > 0):
-   • Meaning: In every direction you step, the surface curves UPWARDS.
-   • Shape: A Valley Basin (Bowl).
-   • Result: LOCAL MINIMUM. Useful if minimizing impurities or cost.
-
-3. MIXED SIGNS (Some positive, some negative):
-   • Meaning: If you walk north-south it curves up, but if you walk east-west it curves down.
-   • Shape: A Mountain Pass (Horse Saddle).
-   • Result: SADDLE POINT. No unique optimum!
-========================================================================================
-```
+| Eigenvalues ($\lambda_i$) | Physical Meaning | Geometric Shape | Optimization Result |
+| :--- | :--- | :--- | :--- |
+| **All Negative** ($\lambda_1 < 0, \lambda_2 < 0, \lambda_3 < 0$) | In every direction you step, the surface curves downwards | Mountain Peak (Dome) | **Local Maximum (True Optimum!)** — Highest yield |
+| **All Positive** ($\lambda_1 > 0, \lambda_2 > 0, \lambda_3 > 0$) | In every direction you step, the surface curves upwards | Valley Basin (Bowl) | **Local Minimum** — Useful if minimizing impurities or cost |
+| **Mixed Signs** (Some positive, some negative) | Curves down in one direction, up in another direction | Mountain Pass (Horse Saddle) | **Saddle Point** — No unique optimum |
+| **Zero or Near-Zero** ($\lambda \approx 0$) | Surface is completely flat along that axis | Stationary Ridge / Trough | **Ridge System** — Inconclusive single point |
 
 In our practice problem, R outputs:
 $$\lambda_1 = -2.49, \quad \lambda_2 = -3.73, \quad \lambda_3 = -4.93$$

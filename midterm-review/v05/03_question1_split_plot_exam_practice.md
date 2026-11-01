@@ -131,16 +131,15 @@ Write these exact steps on your exam paper:
 
 #### 1. The Tidy CSV File (`split_plot.csv`):
 In LibreOffice Calc, create 4 columns and export as `split_plot.csv`:
-```csv
-wp,temp,feed,titer
-1,32C,1,5.00
-1,32C,2,6.62
-1,32C,3,9.45
-1,32C,4,6.02
-2,32C,1,3.95
-...
-6,37C,4,3.44
-```
+| wp | temp | feed | titer |
+| :---: | :---: | :---: | :---: |
+| 1 | 32C | 1 | 5.00 |
+| 1 | 32C | 2 | 6.62 |
+| 1 | 32C | 3 | 9.45 |
+| 1 | 32C | 4 | 6.02 |
+| 2 | 32C | 1 | 3.95 |
+| ... | ... | ... | ... |
+| 6 | 37C | 4 | 3.44 |
 
 #### 2. The Base R Script:
 ```r
@@ -161,18 +160,19 @@ summary(fit)
 ```
 
 **Actual R Output:**
-```
-Error: wp
-          Df Sum Sq Mean Sq F value Pr(>F)
-temp       1  12.06  12.056   2.914  0.163
-Residuals  4  16.55   4.137               
 
-Error: Within
-          Df Sum Sq Mean Sq F value   Pr(>F)    
-feed       3  39.09  13.029   45.94 7.47e-07 ***
-temp:feed  3   0.88   0.295    1.04     0.41    
-Residuals 12   3.40   0.284                     
-```
+#### Error: wp (Whole-Plot Level)
+| Source | Df | Sum Sq | Mean Sq | F value | Pr(>F) | Significance ($\alpha=0.05$) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **temp** | 1 | 12.06 | 12.056 | 2.914 | 0.163 | Not Significant |
+| **Residuals (WP Error)** | 4 | 16.55 | 4.137 | — | — | — |
+
+#### Error: Within (Subplot Level)
+| Source | Df | Sum Sq | Mean Sq | F value | Pr(>F) | Significance ($\alpha=0.05$) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **feed** | 3 | 39.09 | 13.029 | 45.94 | $7.47 \times 10^{-7}$ | **Highly Significant (***)** |
+| **temp:feed** | 3 | 0.88 | 0.295 | 1.04 | 0.410 | Not Significant |
+| **Residuals (SP Error)** | 12 | 3.40 | 0.284 | — | — | — |
 
 ---
 

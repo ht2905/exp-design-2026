@@ -30,7 +30,7 @@ flowchart TD
         SPU["Subplot Unit: Individual Culture Flasks inside each batch (24 units total)"]
         SPE["Subplot Error (MS_SP): Measures local flask-to-flask variation within the same tank"]
     end
-    WP --> SP
+    WPU -->|Broth divided into 4 flasks| SPU
 ```
 
 This is a **Split-Plot Design**:
@@ -156,16 +156,15 @@ This is how you can solve Question 1 in 30 seconds using R Terminal on your lapt
 ### Step 1: Create a Tidy CSV in LibreOffice Calc
 Open LibreOffice Calc (`localc &`), type your data row by row, and save as `split_plot.csv`:
 
-```csv
-wp,temp,feed,titer
-1,32C,1,5.00
-1,32C,2,6.62
-1,32C,3,9.45
-1,32C,4,6.02
-2,32C,1,3.95
-...
-6,37C,4,3.44
-```
+| wp | temp | feed | titer |
+| :---: | :---: | :---: | :---: |
+| 1 | 32C | 1 | 5.00 |
+| 1 | 32C | 2 | 6.62 |
+| 1 | 32C | 3 | 9.45 |
+| 1 | 32C | 4 | 6.02 |
+| 2 | 32C | 1 | 3.95 |
+| ... | ... | ... | ... |
+| 6 | 37C | 4 | 3.44 |
 
 ### Step 2: The 5-Line Base R Script
 Open R Terminal (`R`) in the same folder and type:
@@ -188,17 +187,19 @@ summary(fit)
 ```
 
 ### What R Prints Out:
-```
-Error: wp
-          Df Sum Sq Mean Sq F value Pr(>F)
-temp       1  12.06  12.056   2.914  0.163
-Residuals  4  16.55   4.137               
 
-Error: Within
-          Df Sum Sq Mean Sq F value   Pr(>F)    
-feed       3  39.09  13.029   45.94 7.47e-07 ***
-temp:feed  3   0.88   0.295    1.04     0.41    
-Residuals 12   3.40   0.284                     
-```
+#### Error: wp (Whole-Plot Level)
+| Source | Df | Sum Sq | Mean Sq | F value | Pr(>F) | Significance ($\alpha=0.05$) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **temp** | 1 | 12.06 | 12.056 | 2.914 | 0.163 | Not Significant |
+| **Residuals (WP Error)** | 4 | 16.55 | 4.137 | — | — | — |
+
+#### Error: Within (Subplot Level)
+| Source | Df | Sum Sq | Mean Sq | F value | Pr(>F) | Significance ($\alpha=0.05$) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **feed** | 3 | 39.09 | 13.029 | 45.94 | $7.47 \times 10^{-7}$ | **Highly Significant (***)** |
+| **temp:feed** | 3 | 0.88 | 0.295 | 1.04 | 0.410 | Not Significant |
+| **Residuals (SP Error)** | 12 | 3.40 | 0.284 | — | — | — |
+
 Notice how R's output matches the ToolPak table perfectly, without doing any manual scaling or subtraction!
 

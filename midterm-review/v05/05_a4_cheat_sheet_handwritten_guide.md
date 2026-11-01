@@ -62,11 +62,11 @@
 ### 4. Track 2: Your R Solution via CSV (Memorize for Exam!)
 
 In LibreOffice, save `data.csv`:
-```csv
-wp,temp,feed,titer
-1,32C,1,5.00
-...
-```
+
+| wp | temp | feed | titer |
+| :---: | :---: | :---: | :---: |
+| 1 | 32C | 1 | 5.00 |
+| ... | ... | ... | ... |
 
 Type into R Terminal:
 ```r
@@ -110,11 +110,11 @@ summary(fit)
 ### 3. Your R Script for Question 2 via CSV (Memorize for Exam!)
 
 In LibreOffice, save `bbd.csv`:
-```csv
-x1,x2,x3,yield
--1,-1,0,31.8
-...
-```
+
+| x1 | x2 | x3 | yield |
+| :---: | :---: | :---: | :---: |
+| -1 | -1 | 0 | 31.8 |
+| ... | ... | ... | ... |
 
 Type into R Terminal:
 ```r
