@@ -16,6 +16,7 @@
 _freeze/
 
 # Temporary files
+temp/
 temp_qmd-backup/
 
 # -------------------------
