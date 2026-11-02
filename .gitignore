@@ -18,6 +18,9 @@ _freeze/
 # Temporary files
 temp/
 temp_qmd-backup/
+logs/
+artifacts/
+.venv/
 
 # -------------------------
 # OS / editor junk
@@ -25,6 +28,7 @@ temp_qmd-backup/
 
 .DS_Store
 Thumbs.db
+.~lock.*#
 
 # VS Code
 .vscode/
