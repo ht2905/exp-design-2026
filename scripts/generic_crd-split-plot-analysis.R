@@ -1,6 +1,5 @@
 csv_file <- "data.csv"
 
-# Column mappings: match your exam dataset column names here
 col_resp <- "conc"                # Response variable (e.g. protein yield mg/mL)
 col_wp   <- "temperature"         # Hard-to-change (Whole-Plot) factor
 col_sp   <- "concentration_type"  # Easy-to-change (Subplot) factor
