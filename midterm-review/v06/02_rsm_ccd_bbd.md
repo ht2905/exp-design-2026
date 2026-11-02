@@ -68,6 +68,10 @@ No matrix inversion or calculus needed—just one simple step from your baseline
 
 ## 3. CCD vs. BBD: Why Wet Labs Strongly Prefer Box-Behnken (BBD)
 
+|Box-Behnken Design|Central-Composite Design|
+|---|---|
+|![Box-Behnken Design](assets/bbd.jpg)|![Central-Composite Design](assets/ccd.png)|
+
 To detect curvature and locate a biological peak, you must test each factor at a minimum of 3 levels (Low, Center, High). Two common experimental designs exist:
 
 ```mermaid
