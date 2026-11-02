@@ -64,40 +64,41 @@ d. **(20 Points)** Perform the complete Split-Plot ANOVA test. State the degrees
 
 ## QUESTION 2 (50 Points) – Response Surface Methodology (RSM)
 
-A biotechnology team is optimizing downstream enzymatic cell lysis to maximize the extraction of a recombinant therapeutic enzyme (**Protein Yield**, measured in **mg / g dry cell weight**).
+Below is the data obtained from a Box-Behnken experiment to maximize the extraction of a recombinant therapeutic enzyme (**Protein Yield**, measured in **mg / g dry cell weight**). The factors investigated are Lysis Temperature (`temp`, $^\circ\text{C}$), Lysozyme Concentration (`enzyme`, mg/mL), and Incubation Time (`time`, min).
 
-Three critical quantitative factors were selected for optimization:
-1. **Lysis Temperature ($X_1$, $^\circ\text{C}$):** Low = $30^\circ\text{C}$, Center = $35^\circ\text{C}$, High = $40^\circ\text{C}$
-2. **Lysozyme Concentration ($X_2$, mg/mL):** Low = $0.5\text{ mg/mL}$, Center = $1.0\text{ mg/mL}$, High = $1.5\text{ mg/mL}$
-3. **Incubation Time ($X_3$, min):** Low = $15\text{ min}$, Center = $30\text{ min}$, High = $45\text{ min}$
+| Experiment Number | Temperature ($^\circ\text{C}$) | Lysozyme (mg/mL) | Time (min) | Protein Yield ($y$, mg/g) |
+| :---: | :---: | :---: | :---: | :---: |
+| 1 | 30 | 0.5 | 30 | 31.8 |
+| 2 | 40 | 0.5 | 30 | 37.1 |
+| 3 | 30 | 1.5 | 30 | 39.3 |
+| 4 | 40 | 1.5 | 30 | 39.4 |
+| 5 | 30 | 1.0 | 15 | 39.0 |
+| 6 | 40 | 1.0 | 15 | 40.3 |
+| 7 | 30 | 1.0 | 45 | 35.3 |
+| 8 | 40 | 1.0 | 45 | 39.8 |
+| 9 | 35 | 0.5 | 15 | 35.2 |
+| 10 | 35 | 1.5 | 15 | 42.4 |
+| 11 | 35 | 0.5 | 45 | 34.9 |
+| 12 | 35 | 1.5 | 45 | 38.7 |
+| 13 | 35 | 1.0 | 30 | 45.3 |
+| 14 | 35 | 1.0 | 30 | 45.0 |
+| 15 | 35 | 1.0 | 30 | 45.3 |
 
-The team selected a **Box-Behnken Design (BBD)** with $k = 3$ factors and $n_0 = 3$ center point replicates ($N = 15$ experimental runs total). The experimental data is tabulated below:
+### Sub-Questions (2022 Question Structure):
+a. **(15 Points) State the designing process to explain the design:**  
+   Your answer should include:
+   - The purpose of the experiment and Response Surface Methodology (RSM).
+   - The process of choosing the factor levels: identify the center points and step sizes directly from the table, and write the mathematical coding equations for $x_1, x_2, x_3$.
+   - Why a Box-Behnken Design (BBD) was selected over a Central Composite Design (CCD) for this wet-lab system.
+   - How you are going to use the data obtained from the experiment.
 
-| Run | Temp ($X_1$, $^\circ\text{C}$) | Lysozyme ($X_2$, mg/mL) | Time ($X_3$, min) | Coded $x_1$ | Coded $x_2$ | Coded $x_3$ | Protein Yield ($y$, mg/g) |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 1 | 30 | 0.5 | 30 | -1 | -1 | 0 | 31.8 |
-| 2 | 40 | 0.5 | 30 | +1 | -1 | 0 | 37.1 |
-| 3 | 30 | 1.5 | 30 | -1 | +1 | 0 | 39.3 |
-| 4 | 40 | 1.5 | 30 | +1 | +1 | 0 | 39.4 |
-| 5 | 30 | 1.0 | 15 | -1 | 0 | -1 | 39.0 |
-| 6 | 40 | 1.0 | 15 | +1 | 0 | -1 | 40.3 |
-| 7 | 30 | 1.0 | 45 | -1 | 0 | +1 | 35.3 |
-| 8 | 40 | 1.0 | 45 | +1 | 0 | +1 | 39.8 |
-| 9 | 35 | 0.5 | 15 | 0 | -1 | -1 | 35.2 |
-| 10 | 35 | 1.5 | 15 | 0 | +1 | -1 | 42.4 |
-| 11 | 35 | 0.5 | 45 | 0 | -1 | +1 | 34.9 |
-| 12 | 35 | 1.5 | 45 | 0 | +1 | +1 | 38.7 |
-| 13 | 35 | 1.0 | 30 | 0 | 0 | 0 | 45.3 |
-| 14 | 35 | 1.0 | 30 | 0 | 0 | 0 | 45.0 |
-| 15 | 35 | 1.0 | 30 | 0 | 0 | 0 | 45.3 |
-
-### Sub-Questions:
-a. **(15 Points)** Describe the experimental design process. State the purpose of Response Surface Methodology. Provide the exact mathematical coding equations to convert natural physical variables $(X_1, X_2, X_3)$ to dimensionless coded variables $(x_1, x_2, x_3)$. Explain two reasons why a **Box-Behnken Design (BBD)** was preferred over a Central Composite Design (CCD) for this wet-lab experiment.  
-b. **(25 Points)** Perform the second-order response surface calculations:
-   - State the fitted regression equation.
+b. **(25 Points) Perform appropriate calculations to determine the optimized parameters using the data in the table:**  
+   - State the fitted second-order quadratic regression equation.
    - Present the ANOVA table with First-Order (FO), Two-Way Interaction (TWI), and Pure Quadratic (PQ) partitions.
    - Conduct the **Lack-of-Fit test** at $\alpha = 0.05$ (state $H_0, H_1, F_{\text{LOF}}$, and $p$-value) to evaluate model adequacy.
-   - Calculate the **Stationary Point ($\mathbf{x}_0$)** in coded units and convert it to **natural physical units** ($^\circ\text{C}$, mg/mL, min). Is it inside the experimental domain?
-   - Perform **Canonical / Eigenanalysis** on the surface curvature to prove whether the stationary point is a true Maximum, Minimum, or Saddle Point.
-   - Calculate the predicted optimum Protein Yield ($\hat{y}_{\text{opt}}$).  
-c. **(10 Points)** What is the critical final step that must be conducted in this optimization process before implementing these parameters in routine production?
+   - Calculate the **Stationary Point ($\mathbf{x}_0$)** in coded units and convert it to **natural physical units** ($^\circ\text{C}$, mg/mL, min). Verify whether it lies inside the experimental domain.
+   - Perform **Canonical / Eigenanalysis** on the surface curvature to determine whether the stationary point is a true Maximum, Minimum, or Saddle Point.
+   - Calculate the predicted optimum Protein Yield ($\hat{y}_{\text{opt}}$).
+
+c. **(10 Points) What is the last step you need to do in this optimization process?**  
+   - Describe the required wet-lab confirmatory procedure and statistical verification rule.

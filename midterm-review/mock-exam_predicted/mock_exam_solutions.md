@@ -150,61 +150,73 @@ This experiment is a **Split-Plot Design arranged in a Randomized Complete Block
 ## QUESTION 2 (50 Points) – Response Surface Methodology (RSM)
 
 ### Problem Description & Experimental Data
-A biotechnology team is optimizing downstream enzymatic cell lysis to maximize the extraction of a recombinant therapeutic enzyme (**Protein Yield**, measured in **mg / g dry cell weight**).
+Below is the data obtained from a Box-Behnken experiment to maximize the extraction of a recombinant therapeutic enzyme (**Protein Yield**, measured in **mg / g dry cell weight**). The factors investigated are Lysis Temperature (`temp`, $^\circ\text{C}$), Lysozyme Concentration (`enzyme`, mg/mL), and Incubation Time (`time`, min).
 
-Three critical quantitative factors were selected for optimization:
-1. **Lysis Temperature ($X_1$, $^\circ\text{C}$):** Low = $30^\circ\text{C}$, Center = $35^\circ\text{C}$, High = $40^\circ\text{C}$
-2. **Lysozyme Concentration ($X_2$, mg/mL):** Low = $0.5\text{ mg/mL}$, Center = $1.0\text{ mg/mL}$, High = $1.5\text{ mg/mL}$
-3. **Incubation Time ($X_3$, min):** Low = $15\text{ min}$, Center = $30\text{ min}$, High = $45\text{ min}$
+*(Note: Following the 2022 exam question set format, only natural physical variables are provided on the exam paper; no pre-coded $x_1, x_2, x_3$ columns are given).*
 
-The team selected a **Box-Behnken Design (BBD)** with $k = 3$ factors and $n_0 = 3$ center point replicates ($N = 15$ experimental runs total). The experimental data is tabulated below:
-
-| Run | Temp ($X_1$, $^\circ\text{C}$) | Lysozyme ($X_2$, mg/mL) | Time ($X_3$, min) | Coded $x_1$ | Coded $x_2$ | Coded $x_3$ | Protein Yield ($y$, mg/g) |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 1 | 30 | 0.5 | 30 | -1 | -1 | 0 | 31.8 |
-| 2 | 40 | 0.5 | 30 | +1 | -1 | 0 | 37.1 |
-| 3 | 30 | 1.5 | 30 | -1 | +1 | 0 | 39.3 |
-| 4 | 40 | 1.5 | 30 | +1 | +1 | 0 | 39.4 |
-| 5 | 30 | 1.0 | 15 | -1 | 0 | -1 | 39.0 |
-| 6 | 40 | 1.0 | 15 | +1 | 0 | -1 | 40.3 |
-| 7 | 30 | 1.0 | 45 | -1 | 0 | +1 | 35.3 |
-| 8 | 40 | 1.0 | 45 | +1 | 0 | +1 | 39.8 |
-| 9 | 35 | 0.5 | 15 | 0 | -1 | -1 | 35.2 |
-| 10 | 35 | 1.5 | 15 | 0 | +1 | -1 | 42.4 |
-| 11 | 35 | 0.5 | 45 | 0 | -1 | +1 | 34.9 |
-| 12 | 35 | 1.5 | 45 | 0 | +1 | +1 | 38.7 |
-| 13 | 35 | 1.0 | 30 | 0 | 0 | 0 | 45.3 |
-| 14 | 35 | 1.0 | 30 | 0 | 0 | 0 | 45.0 |
-| 15 | 35 | 1.0 | 30 | 0 | 0 | 0 | 45.3 |
+| Experiment Number | Temperature ($^\circ\text{C}$) | Lysozyme (mg/mL) | Time (min) | Protein Yield ($y$, mg/g) |
+| :---: | :---: | :---: | :---: | :---: |
+| 1 | 30 | 0.5 | 30 | 31.8 |
+| 2 | 40 | 0.5 | 30 | 37.1 |
+| 3 | 30 | 1.5 | 30 | 39.3 |
+| 4 | 40 | 1.5 | 30 | 39.4 |
+| 5 | 30 | 1.0 | 15 | 39.0 |
+| 6 | 40 | 1.0 | 15 | 40.3 |
+| 7 | 30 | 1.0 | 45 | 35.3 |
+| 8 | 40 | 1.0 | 45 | 39.8 |
+| 9 | 35 | 0.5 | 15 | 35.2 |
+| 10 | 35 | 1.5 | 15 | 42.4 |
+| 11 | 35 | 0.5 | 45 | 34.9 |
+| 12 | 35 | 1.5 | 45 | 38.7 |
+| 13 | 35 | 1.0 | 30 | 45.3 |
+| 14 | 35 | 1.0 | 30 | 45.0 |
+| 15 | 35 | 1.0 | 30 | 45.3 |
 
 ---
 
-### Part a: Design Process, Objectives, and Factor Coding (15 Points)
+### Part a: Design Process, Objectives, Level Selection, and Factor Coding (15 Points)
 
-> **Question 2a:** Describe the experimental design process. State the purpose of Response Surface Methodology. Provide the exact mathematical coding equations to convert natural physical variables $(X_1, X_2, X_3)$ to dimensionless coded variables $(x_1, x_2, x_3)$. Explain two reasons why a **Box-Behnken Design (BBD)** was preferred over a Central Composite Design (CCD) for this wet-lab experiment.
+> **Question 2a (2022 Exam Prompt):** State the designing process to explain the design; your answer should include the purpose of the experiment, the process of choosing the levels, the mathematical coding equations for $x_1, x_2, x_3$, why BBD was chosen over CCD, and how you are going to use the data obtained from the experiment.
 
-#### 1. Purpose of Response Surface Methodology (RSM):
-RSM is an empirical modeling approach combining mathematical and statistical techniques. It is applied after preliminary screening designs to:
-1. Model complex, non-linear curvature in the response surface.
-2. Estimate linear, interaction, and pure quadratic effects simultaneously.
-3. Determine the coordinates of the **Stationary Point** $(\mathbf{x}_0)$ that optimize (maximize or minimize) the biological response.
+#### 1. Purpose of the Experiment & Response Surface Methodology (RSM):
+- **Biological Purpose:** To determine the optimal operating condition (combination of temperature, lysozyme dose, and incubation duration) that maximizes recombinant enzyme recovery while minimizing enzymatic degradation.
+- **Methodological Purpose:** RSM is an empirical optimization methodology combining statistical experimental designs and mathematical modeling. Applied after initial factor screening, RSM models non-linear curvature, quantifies factor interactions, and locates the exact stationary point ($\mathbf{x}_0$) representing the process optimum.
 
-#### 2. Factor Coding Equations:
-For each quantitative factor $X_i$, the dimensionless coded variable $x_i \in [-1, +1]$ is computed as:
-$$x_i = \frac{X_i - \text{Center}_i}{\text{Half-Step}_i}$$
+#### 2. Process of Choosing the Factor Levels & Coding Equations (From Raw Table):
+Looking at the experimental table without pre-coded columns:
+1. **Identify the distinct levels for each factor:**
+   - **Temperature ($X_1$):** Values tested are $\{30, 35, 40\}$. There are 3 evenly spaced levels:
+     $$\text{Center} = \frac{30 + 40}{2} = 35^\circ\text{C}, \quad \text{Half-Step} = \frac{40 - 30}{2} = 5^\circ\text{C}$$
+   - **Lysozyme Concentration ($X_2$):** Values tested are $\{0.5, 1.0, 1.5\}$. 3 levels:
+     $$\text{Center} = \frac{0.5 + 1.5}{2} = 1.0\text{ mg/mL}, \quad \text{Half-Step} = \frac{1.5 - 0.5}{2} = 0.5\text{ mg/mL}$$
+   - **Incubation Time ($X_3$):** Values tested are $\{15, 30, 45\}$. 3 levels:
+     $$\text{Center} = \frac{15 + 45}{2} = 30\text{ min}, \quad \text{Half-Step} = \frac{45 - 15}{2} = 15\text{ min}$$
 
-Specifically:
-1. **Temperature ($X_1$, $^\circ\text{C}$):** $\text{Center} = 35$, $\text{Step} = 5$
-   $$x_1 = \frac{X_1 - 35}{5}$$
-2. **Lysozyme Concentration ($X_2$, mg/mL):** $\text{Center} = 1.0$, $\text{Step} = 0.5$
-   $$x_2 = \frac{X_2 - 1.0}{0.5}$$
-3. **Incubation Time ($X_3$, min):** $\text{Center} = 30$, $\text{Step} = 15$
-   $$x_3 = \frac{X_3 - 30}{15}$$
+2. **Formulate the mathematical coding equations:**
+   Dimensionless coded variables $x_i \in \{-1, 0, +1\}$ standardize units and ensure orthogonality:
+   $$x_i = \frac{X_i - \text{Center}_i}{\text{Half-Step}_i}$$
+   
+   - **Temperature ($x_1$):**
+     $$x_1 = \frac{\text{Temp} - 35}{5}$$
+   - **Lysozyme ($x_2$):**
+     $$x_2 = \frac{\text{Lysozyme} - 1.0}{0.5}$$
+   - **Incubation Time ($x_3$):**
+     $$x_3 = \frac{\text{Time} - 30}{15}$$
+
+3. **Verification of BBD Geometry:**
+   Applying these equations verifies that Runs 1–12 are the midpoints of the 12 edges of the 3D factor cube (combinations of $\pm 1, \pm 1, 0$), and Runs 13–15 are repeated center points $(0, 0, 0)$.
 
 #### 3. Why BBD was Preferred Over CCD:
 1. **Avoidance of Extreme Combinations (Protects Biological Samples):** In a Central Composite Design (CCD), experiments must be run at extreme axial star points ($\pm \alpha = \pm 1.682$ or $\pm 1.732$) and extreme factorial corners $(\pm 1, \pm 1, \pm 1)$. In a wet-lab protein extraction, extreme temperature combined with prolonged incubation time will cause severe enzyme thermal denaturation and sample degradation. BBD samples only the midpoints of edges, avoiding simultaneous extremes.
 2. **Fewer Operating Levels (3 Levels vs 5 Levels):** BBD requires only **3 distinct physical levels** ($-1, 0, +1$) per factor, whereas CCD requires **5 distinct physical levels** ($-\alpha, -1, 0, +1, +\alpha$). Setting up 3 controlled water baths and reagent concentrations is far simpler and less prone to pipetting error.
 3. **Run Efficiency:** For $k = 3$, BBD requires only 15 runs ($12 \text{ factorial edges} + 3 \text{ center replicates}$), providing an orthogonal, rotatable/nearly-rotatable design with minimal reagent consumption.
+
+#### 4. How the Data Will Be Used:
+1. Fit a second-order polynomial response surface model with linear, interaction, and quadratic terms.
+2. Perform ANOVA to test overall significance, interaction terms (`TWI`), and surface curvature (`PQ`).
+3. Evaluate model adequacy using the **Lack of Fit** test against replicated center points.
+4. Calculate the stationary point $\mathbf{x}_0$ and convert back to natural physical units.
+5. Use eigenanalysis to classify surface topology (Maximum, Minimum, Saddle) and predict optimal yield.
 
 ---
 
