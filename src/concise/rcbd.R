@@ -1,18 +1,12 @@
-# ==============================================================================
-# 2. RCBD SPLIT-PLOT (CONCISE EXAM EDITION - COMPLETE OUTPUT)
-# ==============================================================================
-# Config: Edit the 4 lines below to match your exam paper
-# ------------------------------------------------------------------------------
-f <- if (file.exists("data.csv")) "data.csv" else "midterm-review/exercises/exercise-03_rcbd/data.csv"
+f <- "data.csv"
 d <- read.csv(f)
 
-y     <- d$cell_growth  # Response variable
-wp    <- factor(d$temp) # Hard-to-change (Whole-Plot) factor
-sp    <- factor(d$medium) # Easy-to-change (Subplot) factor
-block <- factor(d$block) # Nuisance block (Day/Operator/Field)
+y     <- d$milk         # Response variable
+wp    <- factor(d$pasture) # Hard-to-change (Whole-Plot) factor
+sp    <- factor(d$mineral) # Easy-to-change (Subplot) factor
+block <- factor(d$block)   # Nuisance block (Season)
 dat   <- data.frame(block, wp, sp, y)
 
-# Fit Model & Output All Summary Means
 fit <- aov(y ~ wp * sp + Error(block / wp), data = dat)
 cat("\n=== Input Data ===\n"); print(dat)
 cat("\n=== Grand Mean ===\n", mean(y), "\n")
@@ -21,7 +15,6 @@ cat("\n=== Whole-Plot Factor (wp) Means ===\n"); print(aggregate(y ~ wp, data = 
 cat("\n=== Subplot Factor (sp) Means ===\n"); print(aggregate(y ~ sp, data = dat, FUN = mean))
 cat("\n=== wp x sp Interaction Means ===\n"); print(aggregate(y ~ wp + sp, data = dat, FUN = mean))
 
-# Split-Plot ANOVA Table & Table 4 Extras
 cat("\n=== Split-Plot ANOVA Results ===\n"); print(summary(fit))
 s <- summary(fit)
 ms_w <- s[[2]][[1]]["Residuals", "Mean Sq"]; df_w <- s[[2]][[1]]["Residuals", "Df"]
