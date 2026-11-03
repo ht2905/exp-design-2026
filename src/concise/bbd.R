@@ -3,7 +3,7 @@ renv::use("rsm", attach = TRUE)
 f <- "data.csv"
 d <- read.csv(f)
 
-factor_cols <- c("temp", "enzyme", "time") # Three factors
+factor_cols <- c("temp", "power", "time") # Three factors
 resp_col    <- "yield" # Response variable
 
 mid <- sapply(d[factor_cols], function(x) (max(x) + min(x)) / 2)

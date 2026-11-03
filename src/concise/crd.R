@@ -1,9 +1,9 @@
 f <- "data.csv"
 d <- read.csv(f)
 
-y    <- d$conc # Response variable
-wp   <- factor(d$temperature) # Hard-to-change (Whole-Plot) factor
-sp   <- factor(d$concentration_type) # Easy-to-change (Subplot) factor
+y    <- d$tensile # Response variable
+wp   <- factor(d$plasticizer) # Hard-to-change (Whole-Plot) factor
+sp   <- factor(d$irradiation) # Easy-to-change (Subplot) factor
 unit <- NULL # Three cases
 
 if (is.null(unit)) {

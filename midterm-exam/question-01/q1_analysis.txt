@@ -1,0 +1,120 @@
+=== Input Data ===
+          unit       wp   sp    y
+1   glycerol.1 glycerol   uv 22.5
+2   glycerol.2 glycerol   uv 18.2
+3   glycerol.3 glycerol   uv 24.1
+4   glycerol.4 glycerol   uv 19.8
+5   glycerol.5 glycerol   uv 21.0
+6   glycerol.6 glycerol   uv 20.5
+7   glycerol.7 glycerol   uv 23.2
+8   glycerol.8 glycerol   uv 17.9
+9   glycerol.9 glycerol   uv 19.1
+10 glycerol.10 glycerol   uv 21.4
+11 glycerol.11 glycerol   uv 22.0
+12 glycerol.12 glycerol   uv 25.0
+13  sorbitol.1 sorbitol   uv 32.1
+14  sorbitol.2 sorbitol   uv 28.5
+15  sorbitol.3 sorbitol   uv 30.2
+16  sorbitol.4 sorbitol   uv 34.0
+17  sorbitol.5 sorbitol   uv 27.1
+18  sorbitol.6 sorbitol   uv 33.5
+19  sorbitol.7 sorbitol   uv 29.0
+20  sorbitol.8 sorbitol   uv 31.2
+21  sorbitol.9 sorbitol   uv 32.8
+22 sorbitol.10 sorbitol   uv 28.9
+23 sorbitol.11 sorbitol   uv 35.1
+24 sorbitol.12 sorbitol   uv 30.5
+25  glycerol.1 glycerol ctrl 25.1
+26  glycerol.2 glycerol ctrl 20.4
+27  glycerol.3 glycerol ctrl 26.8
+28  glycerol.4 glycerol ctrl 21.5
+29  glycerol.5 glycerol ctrl 23.9
+30  glycerol.6 glycerol ctrl 22.0
+31  glycerol.7 glycerol ctrl 25.6
+32  glycerol.8 glycerol ctrl 19.8
+33  glycerol.9 glycerol ctrl 21.2
+34 glycerol.10 glycerol ctrl 23.5
+35 glycerol.11 glycerol ctrl 24.2
+36 glycerol.12 glycerol ctrl 27.5
+37  sorbitol.1 sorbitol ctrl 35.4
+38  sorbitol.2 sorbitol ctrl 31.2
+39  sorbitol.3 sorbitol ctrl 33.0
+40  sorbitol.4 sorbitol ctrl 37.1
+41  sorbitol.5 sorbitol ctrl 29.8
+42  sorbitol.6 sorbitol ctrl 36.2
+43  sorbitol.7 sorbitol ctrl 31.8
+44  sorbitol.8 sorbitol ctrl 34.1
+45  sorbitol.9 sorbitol ctrl 35.0
+46 sorbitol.10 sorbitol ctrl 31.5
+47 sorbitol.11 sorbitol ctrl 38.0
+48 sorbitol.12 sorbitol ctrl 33.2
+
+=== Grand Mean ===
+ 27.40417
+
+=== Whole-Plot Unit Means ===
+          unit     y
+1   glycerol.1 23.80
+2   sorbitol.1 33.75
+3   glycerol.2 19.30
+4   sorbitol.2 29.85
+5   glycerol.3 25.45
+6   sorbitol.3 31.60
+7   glycerol.4 20.65
+8   sorbitol.4 35.55
+9   glycerol.5 22.45
+10  sorbitol.5 28.45
+11  glycerol.6 21.25
+12  sorbitol.6 34.85
+13  glycerol.7 24.40
+14  sorbitol.7 30.40
+15  glycerol.8 18.85
+16  sorbitol.8 32.65
+17  glycerol.9 20.15
+18  sorbitol.9 33.90
+19 glycerol.10 22.45
+20 sorbitol.10 30.20
+21 glycerol.11 23.10
+22 sorbitol.11 36.55
+23 glycerol.12 26.25
+24 sorbitol.12 31.85
+
+=== Whole-Plot Factor (wp) Means ===
+        wp        y
+1 glycerol 22.34167
+2 sorbitol 32.46667
+
+=== Subplot Factor (sp) Means ===
+    sp        y
+1 ctrl 28.65833
+2   uv 26.15000
+
+=== wp x sp Interaction Means ===
+        wp   sp        y
+1 glycerol ctrl 23.45833
+2 sorbitol ctrl 33.85833
+3 glycerol   uv 21.22500
+4 sorbitol   uv 31.07500
+
+=== Split-Plot ANOVA Results ===
+
+Error: unit
+          Df Sum Sq Mean Sq F value   Pr(>F)
+wp         1 1230.2  1230.2     103 9.18e-10 ***
+Residuals 22  262.6    11.9
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Error: Within
+          Df Sum Sq Mean Sq F value   Pr(>F)
+sp         1  75.50   75.50 1247.32  < 2e-16 ***
+wp:sp      1   0.91    0.91   14.99 0.000824 ***
+Residuals 22   1.33    0.06
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+=== Optional: Table 4 Extras ===
+Total DF   : 47
+Total SS   : 1570.56
+WP Error F : 197.22
+WP Error P : 0
