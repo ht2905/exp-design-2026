@@ -30,50 +30,35 @@ flowchart TD
 
 ## Repository Layout
 
-```mermaid
-flowchart LR
-    Root["exp-design_2026-2027/"] --> SRC["src/ (R Scripts)"]
-    Root --> MTE["midterm-exam/ (Exam Files & Preparation)"]
-    Root --> REF["references/ (Syllabus & Guides)"]
-    Root --> ENV["renv/ & renv.lock (Reproducibility)"]
-
-    SRC --> SRC_C["concise/ (Fast, exam-ready scripts)"]
-    SRC --> SRC_G["generic_*.R (Defensive, parameterized templates)"]
-
-    MTE --> MTE_Q["question-01/ & question-02/ (Exam work)"]
-    MTE --> MTE_R["pre-exam-review/ (Study materials)"]
-    MTE_R --> MTE_V6["v06/ (Master study book)"]
-    MTE_R --> MTE_A["analysis/ (Comparative theoretical guides)"]
-    MTE_R --> MTE_M["mock-exam_predicted/ (Predicted paper & solutions)"]
-    MTE_R --> MTE_S["sample-datasets/ (Reference datasets)"]
+```text
+exp-design-2026/
+├── midterm-exam/              # Examination tasks, mock reviews, and master study guides
+├── references/                # Course syllabus and official statistical package documentation
+├── renv/                      # R package environment isolation manifests
+└── src/                       # Production and exam-optimized biostatistical R scripts
 ```
 
-### Directory Overview
+### Domain Architecture
 
-| Directory / File | Description | Details |
-| :--- | :--- | :--- |
-| **[`src/concise/`](src/concise/)** | High-efficiency scripts | Minimal-line, fast-execution Base R scripts (`crd.R`, `rcbd.R`, `bbd.R`, `ccd.R`) tailored for direct terminal execution under exam constraints. |
-| **[`src/`](src/)** | Generic analysis pipelines | Parameterized, defensive R scripts with column validation (`generic_bbd-analysis.R`, `generic_ccd-analysis.R`, `generic_crd-split-plot-analysis.R`, `generic_rcbd-split-plot-analysis.R`) and instructor reference (`dr-khoi_bbd.R`). |
-| **[`midterm-exam/`](midterm-exam/)** | Midterm examination workspace | Live exam question folders (`question-01/` CRD Split-Plot, `question-02/` BBD RSM) and previous review archives. |
-| **[`midterm-exam/pre-exam-review/v06/`](midterm-exam/pre-exam-review/v06/)** | Master Self-Study Book (v06) | 7-part study guide translating complex biostatistical concepts into plain-English wet-lab biology intuition. |
-| **[`midterm-exam/pre-exam-review/analysis/`](midterm-exam/pre-exam-review/analysis/)** | In-depth technical guides | Detailed comparative notes (BBD vs. CCD, CRD vs. RCBD split-plots, second-order coefficient interpretation, 2022 exam walkthrough). |
-| **[`midterm-exam/pre-exam-review/mock-exam_predicted/`](midterm-exam/pre-exam-review/mock-exam_predicted/)** | Mock exam suite | Predicted exam papers, mock CSV datasets, and complete model solutions. |
-| **[`midterm-exam/pre-exam-review/sample-datasets/`](midterm-exam/pre-exam-review/sample-datasets/)** | Benchmark datasets | Reference datasets and metadata for BBD, CCD, CRD, and RCBD split-plots. |
-| **[`references/`](references/)** | Course documentation | BT317IU syllabus, Russell Lenth's `rsm` documentation, and split-plot tutorials. |
-| **[`renv.lock`](renv.lock)** | Package lockfile | R environment state managed via `renv`. |
+| Domain | Role | Key Components |
+|:---|:---|:---|
+| **[`src/`](src/)** | R Analysis Scripts | Minimal-line exam scripts (`src/concise/`) and defensive parameterized templates (`generic_*.R`) for Split-Plot and RSM evaluations. |
+| **[`midterm-exam/`](midterm-exam/)** | Examination Workspace | Problem solutions (`question-01/`, `question-02/`), predicted mock papers, comparative analysis notes, and the Master Self-Study Book (`v06/`). |
+| **[`references/`](references/)** | Reference Documentation | Syllabus guidelines, Russell Lenth's `rsm` documentation, and split-plot computational guides. |
+| **[`renv.lock`](renv.lock)** | Reproducibility | Locked R environment state managed via `renv`. |
 
 ---
 
 ## Experimental Design Comparison
 
 ### 1. Split-Plot Designs (CRD vs. RCBD)
-When a factor is hard to change (Whole Plot, e.g., temperature in large incubators or pasture conditions), easy-to-change factors (Subplots, e.g., formulation, irradiation, mineral feed) are nested within each whole plot unit.
+When a factor is hard to change (Whole Plot, e.g., temperature in large incubators or pasture conditions), easy-to-change factors (Subplots, e.g., formulation, irradiation, mineral additives) are nested inside whole plots.
 
-| Design Attribute | CRD Split-Plot | RCBD Split-Plot |
-| :--- | :--- | :--- |
-| **Whole-Plot Randomization** | Completely randomized to experimental units | Restricted within homogenous blocks (batches, days, litters) |
-| **Error Strata** | 2 strata: Whole-Plot Unit Error and Subplot Error | 3 strata: Block, Whole-Plot Error (`Block:WP`), Subplot Error |
-| **R Formula Syntax** | `aov(y ~ wp * sp + Error(unit), data = dat)` | `aov(y ~ wp * sp + Error(block / wp), data = dat)` |
+| Feature | Completely Randomized Split-Plot (CRD) | Randomized Complete Block Split-Plot (RCBD) |
+|:---|:---|:---|
+| **Whole-Plot Assignment** | Whole plots assigned completely at random | Whole plots arranged in homogeneous blocks |
+| **Error Strata** | 2 error strata: Whole-Plot Error & Subplot Error | 2 error strata: Block:Whole-Plot Error & Subplot Error |
+| **R Formula** | `aov(y ~ wp * sp + Error(wp_unit), data = dat)` | `aov(y ~ wp * sp + Error(block / wp), data = dat)` |
 | **Whole-Plot Significance** | $F_{WP} = \frac{MS_{WP}}{MS_{\text{WP Error}}}$ | $F_{WP} = \frac{MS_{WP}}{MS_{\text{Block:WP}}}$ |
 | **Analysis Script** | [`src/concise/crd.R`](src/concise/crd.R) | [`src/concise/rcbd.R`](src/concise/rcbd.R) |
 
@@ -81,7 +66,7 @@ When a factor is hard to change (Whole Plot, e.g., temperature in large incubato
 Used for modeling continuous second-order quadratic surfaces to locate optimal operating conditions ($y_{\max}$).
 
 | Feature | Box-Behnken Design (BBD) | Central Composite Design (CCD) |
-| :--- | :--- | :--- |
+|:---|:---|:---|
 | **Factor Levels** | 3 levels ($-1, 0, +1$) | 5 levels ($-\alpha, -1, 0, +1, +\alpha$) |
 | **Point Placement** | Factorial edge midpoints + center points | Cube corners + axial star points + center points |
 | **Extreme Corner Runs** | None (spherical domain; protects fragile reagents) | Yes (tests extreme simultaneous combinations) |
@@ -94,13 +79,13 @@ Used for modeling continuous second-order quadratic surfaces to locate optimal o
 ## Setup & Running Scripts
 
 ### 1. Package Management (`renv`)
-Dependencies are locked with `renv` to maintain consistency across workstations.
+Dependencies are locked with `renv` to maintain consistency across workstations:
 
 ```bash
 Rscript -e "renv::restore()"
 ```
 
-### 2. Running the Analysis Scripts
+### 2. Running Analysis Scripts
 The scripts in `src/concise/` expect a `data.csv` file in the working directory:
 
 ```bash
@@ -118,12 +103,12 @@ Rscript src/concise/ccd.R
 ```
 
 ### 3. Interpreting RSM Script Diagnostics
-The RSM scripts ([`bbd.R`](src/concise/bbd.R) and [`ccd.R`](src/concise/ccd.R)) print standard diagnostic sections:
+The RSM scripts ([`bbd.R`](src/concise/bbd.R) and [`ccd.R`](src/concise/ccd.R)) evaluate standard diagnostic metrics:
 1. **Factor Coding:** Converts natural units into dimensionless coordinates:
    $$x_i = \frac{X_i - \text{Midpoint}}{\text{Step}}$$
 2. **Second-Order Coefficients:** Displays linear slope, quadratic curvature, and pairwise interaction estimates.
 3. **ANOVA Decomposition:** Evaluates First-Order (FO), Two-Way Interaction (TWI), and Pure Quadratic (PQ) effects.
-4. **Lack-of-Fit Test:** Compares model error against pure experimental error. An adequate fit requires failing to reject $H_0$ ($p > 0.05$).
+4. **Lack-of-Fit Test:** Compares model error against pure experimental error ($p > 0.05$ indicates adequate fit).
 5. **Stationary Point ($\mathbf{x}_0$):** Coded critical coordinates computed via $\mathbf{x}_0 = -\frac{1}{2} \mathbf{B}^{-1} \mathbf{b}$.
 6. **Physical Decoding:** Converts coded coordinates back to physical laboratory units (°C, mg/mL, minutes).
 7. **Canonical Eigenanalysis:** Evaluates surface topology via eigenvalue signs ($\lambda_i$):
@@ -134,16 +119,8 @@ The RSM scripts ([`bbd.R`](src/concise/bbd.R) and [`ccd.R`](src/concise/ccd.R)) 
 
 ---
 
-## Study Guide Index (`v06`)
+## Reference Guides & Study Materials
 
-The self-study book located in [`midterm-exam/pre-exam-review/v06/`](midterm-exam/pre-exam-review/v06/) covers the course syllabus in sequence:
-
-| Chapter | File | Core Content |
-| :--- | :--- | :--- |
-| **00** | [`00_biostats_crash_course.md`](midterm-exam/pre-exam-review/v06/00_biostats_crash_course.md) | Practical breakdown of variance, sum of squares, degrees of freedom, $F$-statistic, and $p$-values. |
-| **01** | [`01_split_plot_design_and_analysis.md`](midterm-exam/pre-exam-review/v06/01_split_plot_design_and_analysis.md) | Split-Plot principles, ANOVA strata, Excel ToolPak calculations, and Base R implementation. |
-| **02** | [`02_rsm_ccd_bbd.md`](midterm-exam/pre-exam-review/v06/02_rsm_ccd_bbd.md) | Biological curvature intuition, 3-point factor coding, BBD vs. CCD safety, Lack of Fit, and eigenvalue rules. |
-| **03** | [`03_question1_split_plot_exam_practice.md`](midterm-exam/pre-exam-review/v06/03_question1_split_plot_exam_practice.md) | 50-point practice problem: Bioreactor monoclonal antibody production analyzed via Excel and R. |
-| **04** | [`04_question2_rsm_exam_practice.md`](midterm-exam/pre-exam-review/v06/04_question2_rsm_exam_practice.md) | 50-point practice problem: Enzymatic cell lysis optimization analyzed using R's `rsm` library. |
-| **05** | [`05_a4_cheat_sheet_handwritten_guide.md`](midterm-exam/pre-exam-review/v06/05_a4_cheat_sheet_handwritten_guide.md) | Layout guide for preparing a handwritten A4 reference sheet for closed-book/offline exams. |
-| **06** | [`06_midterm_scripts-guide.md`](midterm-exam/pre-exam-review/v06/06_midterm_scripts-guide.md) | Operational guide for executing and troubleshooting analysis scripts in the terminal. |
+- **Master Self-Study Book (v06):** For detailed chapter breakdowns, arithmetic derivations, Excel ToolPak walk-throughs, and plain-English wet-lab intuitions, see [`midterm-exam/pre-exam-review/v06/`](midterm-exam/pre-exam-review/v06/README.md).
+- **Comparative Analysis Notes:** Side-by-side design guides and 2022 exam post-mortems in [`midterm-exam/pre-exam-review/analysis/`](midterm-exam/pre-exam-review/analysis/).
+- **Mock Exam Suite:** Model exam papers and verified solutions in [`midterm-exam/pre-exam-review/mock-exam_predicted/`](midterm-exam/pre-exam-review/mock-exam_predicted/).
