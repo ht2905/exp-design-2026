@@ -43,7 +43,7 @@ exp-design-2026/
 | Domain | Role | Key Components |
 |:---|:---|:---|
 | **[`src/`](src/)** | R Analysis Scripts | Minimal-line exam scripts (`src/concise/`) and defensive parameterized templates (`generic_*.R`) for Split-Plot and RSM evaluations. |
-| **[`midterm-exam/`](midterm-exam/)** | Examination Workspace | Problem solutions (`question-01/`, `question-02/`), predicted mock papers, comparative analysis notes, and the Master Self-Study Book (`v06/`). |
+| **[`midterm-exam/`](midterm-exam/)** | Examination Workspace | Problem solutions (`question-01/`, `question-02/`), predicted mock papers, comparative analysis notes, and the Master Self-Study Guide (`study-guide/`). |
 | **[`references/`](references/)** | Reference Documentation | Syllabus guidelines, Russell Lenth's `rsm` documentation, and split-plot computational guides. |
 | **[`renv.lock`](renv.lock)** | Reproducibility | Locked R environment state managed via `renv`. |
 
@@ -121,6 +121,6 @@ The RSM scripts ([`bbd.R`](src/concise/bbd.R) and [`ccd.R`](src/concise/ccd.R)) 
 
 ## Reference Guides & Study Materials
 
-- **Master Self-Study Book (v06):** For detailed chapter breakdowns, arithmetic derivations, Excel ToolPak walk-throughs, and plain-English wet-lab intuitions, see [`midterm-exam/pre-exam-review/v06/`](midterm-exam/pre-exam-review/v06/README.md).
+- **Master Self-Study Guide:** For detailed chapter breakdowns, arithmetic derivations, Excel ToolPak walk-throughs, and plain-English wet-lab intuitions, see [`midterm-exam/pre-exam-review/study-guide/`](midterm-exam/pre-exam-review/study-guide/README.md).
 - **Comparative Analysis Notes:** Side-by-side design guides and 2022 exam post-mortems in [`midterm-exam/pre-exam-review/analysis/`](midterm-exam/pre-exam-review/analysis/).
-- **Mock Exam Suite:** Model exam papers and verified solutions in [`midterm-exam/pre-exam-review/mock-exam_predicted/`](midterm-exam/pre-exam-review/mock-exam_predicted/).
+- **Mock Exam Suite:** Model exam papers and verified solutions in [`midterm-exam/pre-exam-review/mock-exam-predicted/`](midterm-exam/pre-exam-review/mock-exam-predicted/).
